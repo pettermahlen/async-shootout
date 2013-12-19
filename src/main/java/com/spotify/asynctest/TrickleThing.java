@@ -10,6 +10,7 @@ import com.spotify.trickle.Trickle;
 
 import java.util.concurrent.Executor;
 
+import static com.google.common.util.concurrent.Futures.immediateFuture;
 import static com.spotify.trickle.Name.named;
 
 /**
@@ -43,7 +44,7 @@ public class TrickleThing implements AsyncThing {
     Node1<DecorationResult, String> result = new Node1<DecorationResult, String>() {
       @Override
       public ListenableFuture<String> run(DecorationResult arg) {
-        return Futures.immediateFuture(arg.getDecorationResult());
+        return immediateFuture(arg.getDecorationResult());
       }
     };
 

@@ -32,11 +32,7 @@ public class RxJavaThing implements AsyncThing {
         new Func1<LookupResult, Observable<? extends DecorationResult>>() {
           @Override
           public Observable<? extends DecorationResult> call(LookupResult lookupResult) {
-            if (lookupResult.getVersion() == Version.A) {
-              return services.decorateVersionA(lookupResult);
-            }
-
-            return services.decorateVersionB(lookupResult);
+            return (lookupResult.getVersion() == Version.A) ? services.decorateVersionA(lookupResult) : services.decorateVersionB(lookupResult);
           }
         }
     ).onErrorReturn(new Func1<Throwable, DecorationResult>() {

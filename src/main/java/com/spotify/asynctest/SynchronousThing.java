@@ -5,6 +5,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * TODO: document!
  */
@@ -20,11 +22,11 @@ public class SynchronousThing implements AsyncThing {
   @Override
   public ListenableFuture<String> call(int number, String userName) {
     try {
-      LookupResult lookupResult = services.lookup(number, userName).get();
+      LookupResult lookupResult = services.lookup(number, userName).get(100, TimeUnit.MILLISECONDS);
 
       DecorationResult decorationResult = getDecorationResult(lookupResult);
 
-      services.log(userName, lookupResult).get();
+      services.log(userName, lookupResult).get(100, TimeUnit.MILLISECONDS);
 
       return Futures.immediateFuture(decorationResult.getDecorationResult());
     }
@@ -38,10 +40,10 @@ public class SynchronousThing implements AsyncThing {
 
     try {
       if (lookupResult.getVersion() == Version.A) {
-        decorationResult = services.decorateVersionA(lookupResult).get();
+        decorationResult = services.decorateVersionA(lookupResult).get(100, TimeUnit.MILLISECONDS);
       }
       else {
-        decorationResult = services.decorateVersionB(lookupResult).get();
+        decorationResult = services.decorateVersionB(lookupResult).get(100, TimeUnit.MILLISECONDS);
       }
     }
     catch (Exception e) {
