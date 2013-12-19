@@ -14,7 +14,8 @@ If you want to provide some feedback, then follow the following steps:
 [ListenableFutures](src/main/java/com/spotify/asynctest/ListenableFutureThing.java), 
 [RxJava](src/main/java/com/spotify/asynctest/RxJavaThing.java), 
 [Trickle](src/main/java/com/spotify/asynctest/TrickleThing.java).
-2. Head to XXX and let us know what you think.
+2. Head to https://docs.google.com/a/spotify.com/forms/d/1urZQ0DWQxgX2ky-Sq3_zpLHY-avKGo5sfxJE6JAo17g/viewform
+and let us know what you thought of the different frameworks.
 
 The example graph is this:
 
