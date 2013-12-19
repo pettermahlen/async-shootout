@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static com.google.common.util.concurrent.Futures.immediateFailedFuture;
 import static com.google.common.util.concurrent.Futures.immediateFuture;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -130,7 +131,7 @@ public abstract class ThingTester {
   private void releaseAndCheckFutureCompletes(ListenableFuture<String> future) throws InterruptedException, ExecutionException, TimeoutException {
     blockableServices.releaseAll();
 
-    future.get(10, TimeUnit.MILLISECONDS);
+    future.get(100, TimeUnit.MILLISECONDS);
   }
 
   private class BlockableServices implements Services {
@@ -192,7 +193,7 @@ public abstract class ThingTester {
     @Override
     public ListenableFuture<LookupResult> lookup(int number, String userName) {
       if (failLookup) {
-        throw new RuntimeException("configured failure");
+        return immediateFailedFuture(new RuntimeException("configured failure"));
       }
 
       return immediateFuture(new LookupResult(Version.B));
@@ -201,7 +202,7 @@ public abstract class ThingTester {
     @Override
     public ListenableFuture<Void> log(String userName, LookupResult result) {
       if (failLog) {
-        throw new RuntimeException("configured failure");
+        return immediateFailedFuture(new RuntimeException("configured failure"));
       }
 
       return immediateFuture(null);
@@ -215,7 +216,7 @@ public abstract class ThingTester {
     @Override
     public ListenableFuture<DecorationResult> decorateVersionB(LookupResult result) {
       if (failDecorate) {
-        throw new RuntimeException("configured failure");
+        return immediateFailedFuture(new RuntimeException("configured failure"));
       }
 
       return immediateFuture(new DecorationResult("this is the decorated thang"));
