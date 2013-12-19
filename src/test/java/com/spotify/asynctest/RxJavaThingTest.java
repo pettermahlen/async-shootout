@@ -10,6 +10,7 @@ public class RxJavaThingTest extends ThingTester {
   protected AsyncThing createThing(Services services) {
     Scheduler scheduler = Schedulers.executor(Executors.newSingleThreadExecutor());
 
+    // see RxServices for wrapping rationale
     return new RxJavaThing(new RxServices(services, scheduler));
   }
 }

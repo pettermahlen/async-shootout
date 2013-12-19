@@ -6,7 +6,10 @@ import rx.Observable;
 import rx.Scheduler;
 
 /**
- * Wrapper to make it easier to use Observables in the RxJavaThing implementation.
+ * Wrapper to make it easier to use Observables in the RxJavaThing implementation. This is cheating
+ * a little bit in the sense that it makes it a bit easier to use RxJava, but the rationale is that
+ * in a real RxJava scenario, our services/service clients would be returning Observables rather
+ * than Futures. This class handles some more or less obscure details relating to that.
  */
 public class RxServices {
   private final Services services;

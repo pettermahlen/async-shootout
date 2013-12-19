@@ -9,14 +9,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static com.google.common.util.concurrent.Futures.immediateFuture;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -24,9 +22,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * TODO: document!
- */
 public abstract class ThingTester {
   Services services;
   BlockableServices blockableServices;
@@ -47,7 +42,7 @@ public abstract class ThingTester {
   public void shouldCallMethodsWithCorrectParametersA() throws Exception {
     services = mock(Services.class);
 
-    LookupResult lookupResult = new LookupResult(Version.A, 897234L);
+    LookupResult lookupResult = new LookupResult(Version.A);
 
     when(services.lookup(124, "heyho")).thenReturn(immediateFuture(lookupResult));
     when(services.decorateVersionA(lookupResult)).thenReturn(immediateFuture(new DecorationResult("decoorated")));
@@ -61,7 +56,7 @@ public abstract class ThingTester {
   public void shouldCallMethodsWithCorrectParametersB() throws Exception {
     services = mock(Services.class);
 
-    LookupResult lookupResult = new LookupResult(Version.B, 8787L);
+    LookupResult lookupResult = new LookupResult(Version.B);
 
     when(services.lookup(877, "sdfhwe")).thenReturn(immediateFuture(lookupResult));
     when(services.decorateVersionB(lookupResult)).thenReturn(immediateFuture(new DecorationResult("decoorated")));
@@ -139,11 +134,7 @@ public abstract class ThingTester {
   }
 
   private class BlockableServices implements Services {
-    private final Semaphore lookupSemaphore = new Semaphore(1);
-    private final Semaphore decorateSemaphore = new Semaphore(1);
-    private final Semaphore logSemaphore = new Semaphore(1);
-
-    private volatile ListenableFuture<LookupResult> lookupFuture = immediateFuture(new LookupResult(Version.A, 99));
+    private volatile ListenableFuture<LookupResult> lookupFuture = immediateFuture(new LookupResult(Version.A));
     private volatile ListenableFuture<Void> logFuture = immediateFuture(null);
     private volatile ListenableFuture<DecorationResult> decorationFuture = immediateFuture(new DecorationResult("dekorerad och klar"));
 
@@ -185,7 +176,7 @@ public abstract class ThingTester {
         ((SettableFuture<Void>) logFuture).set(null);
       }
       if (lookupFuture instanceof SettableFuture) {
-        ((SettableFuture<LookupResult>) lookupFuture).set(new LookupResult(Version.A, 99));
+        ((SettableFuture<LookupResult>) lookupFuture).set(new LookupResult(Version.A));
       }
       if (decorationFuture instanceof SettableFuture) {
         ((SettableFuture<DecorationResult>) decorationFuture).set(new DecorationResult("dekorerad och klar"));
@@ -204,7 +195,7 @@ public abstract class ThingTester {
         throw new RuntimeException("configured failure");
       }
 
-      return immediateFuture(new LookupResult(Version.B, 82734));
+      return immediateFuture(new LookupResult(Version.B));
     }
 
     @Override

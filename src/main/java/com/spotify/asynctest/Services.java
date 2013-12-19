@@ -3,7 +3,7 @@ package com.spotify.asynctest;
 import com.google.common.util.concurrent.ListenableFuture;
 
 /**
- * TODO: document!
+ * Interface defining the downstream service calls.
  */
 public interface Services {
   ListenableFuture<LookupResult> lookup(int number, String userName);

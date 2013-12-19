@@ -31,8 +31,8 @@ The example graph is this:
 ```
 
 That is, first do a lookup of something using two input parameters, then check the results of the lookup and 
-do either decoration A or decoration B. Also make sure to log the results of the lookup, and once the log is complete
+do either decoration A or decoration B. If the decoration fails, you should return a default value.
+Also make sure to log the results of the lookup, and once the log is complete
 and the decorated result is available, return it. There is a
-[synchronous reference implementation](src/main/java/com/spotify/asynctest/TrickleThing.java) that should provide
+[synchronous reference implementation](src/main/java/com/spotify/asynctest/SynchronousThing.java) that should provide
 some more information, and there are unit tests that should only work when you're done.
-

@@ -3,7 +3,7 @@ package com.spotify.asynctest;
 import java.util.Objects;
 
 /**
- * TODO: document!
+ * Result of a 'decoration' call.
  */
 public class DecorationResult {
   public static final DecorationResult DEFAULT = new DecorationResult("Nice decoration!");

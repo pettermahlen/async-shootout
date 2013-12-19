@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Synchronous implementation of the graph, shown as an example. This class doesn't pass all the
- * tests.
+ * tests, as it's not asynchronous.
  */
 public class SynchronousThing implements AsyncThing {
   private static final Logger LOG = LoggerFactory.getLogger(SynchronousThing.class);

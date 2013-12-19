@@ -14,7 +14,8 @@ import static com.google.common.util.concurrent.Futures.immediateFuture;
 import static com.spotify.trickle.Name.named;
 
 /**
- * TODO: document!
+ *  Implementation of {@link AsyncThing} using Trickle. See https://ghe.spotify.net/petter/trickle
+ *  for information about how to use Trickle.
  */
 public class TrickleThing implements AsyncThing {
   public static final Name<String> USER_NAME = named("userName", String.class);

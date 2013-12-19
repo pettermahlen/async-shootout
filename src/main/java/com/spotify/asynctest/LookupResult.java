@@ -3,15 +3,13 @@ package com.spotify.asynctest;
 import java.util.Objects;
 
 /**
- * TODO: document!
+ * Result of a 'lookup' call.
  */
 public class LookupResult {
   private final Version version;
-  private final long value;
 
-  public LookupResult(Version version, long value) {
+  public LookupResult(Version version) {
     this.version = version;
-    this.value = value;
   }
 
   public Version getVersion() {
