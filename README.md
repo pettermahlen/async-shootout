@@ -26,9 +26,9 @@ The example graph is this:
        /        \
  decorate        log
  using A or B    /
-      \        /  (wait for log to complete)
-       return 
-       decorated result
+       \       /  (wait for log to complete)
+         return 
+    decorated result
 ```
 
 That is, first do a lookup of something using two input parameters, then check the results of the lookup and 
