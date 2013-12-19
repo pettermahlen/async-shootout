@@ -4,15 +4,15 @@ async-test
 The purpose of this project is to collect feedback about three different ways to do nested
 asynchronous calls in Java:
 
-1. Raw ListenableFutures
-2. RxJava
+1. Raw ListenableFutures - from Guava.
+2. RxJava - a library produced by Netflix, based on work done by Erik Meijer in .NET.
 3. An experimental internal library called Trickle.
 
 If you want to provide some feedback, then follow the following steps:
 
-1. Implement the example graph in each of the three classes: 
+1. Implement an example call graph in each of the three classes: 
 [ListenableFutures](src/main/java/com/spotify/asynctest/ListenableFutureThing.java), 
-[RxJava](src/main/java/com/spotify/asynctest/RxJavaThing.java), 
+[RxJava](src/main/java/com/spotify/asynctest/RxJavaThing.java) and
 [Trickle](src/main/java/com/spotify/asynctest/TrickleThing.java).
 2. Head to https://docs.google.com/a/spotify.com/forms/d/1urZQ0DWQxgX2ky-Sq3_zpLHY-avKGo5sfxJE6JAo17g/viewform
 and let us know what you thought of the different frameworks.
