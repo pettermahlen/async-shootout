@@ -7,7 +7,7 @@ package com.spotify.asynctest
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext
 
-class ScalaFutureThing(service: ScalaServices)
+class ScalaThing(service: ScalaServices)
   extends ScalaAsyncThing {
 
   import ExecutionContext.Implicits.global
