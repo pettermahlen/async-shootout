@@ -2,6 +2,7 @@ package com.spotify.asynctest;
 
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -142,36 +143,24 @@ public abstract class ThingTester {
     private final Semaphore decorateSemaphore = new Semaphore(1);
     private final Semaphore logSemaphore = new Semaphore(1);
 
+    private volatile ListenableFuture<LookupResult> lookupFuture = immediateFuture(new LookupResult(Version.A, 99));
+    private volatile ListenableFuture<Void> logFuture = immediateFuture(null);
+    private volatile ListenableFuture<DecorationResult> decorationFuture = immediateFuture(new DecorationResult("dekorerad och klar"));
+
+
     @Override
     public ListenableFuture<LookupResult> lookup(int number, String userName) {
-      try {
-        lookupSemaphore.acquire();
-        return immediateFuture(new LookupResult(Version.A, 99));
-      }
-      catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
+      return lookupFuture;
     }
 
     @Override
     public ListenableFuture<Void> log(String userName, LookupResult result) {
-      try {
-        logSemaphore.acquire();
-
-        return immediateFuture(null);
-      } catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
+      return logFuture;
     }
 
     @Override
     public ListenableFuture<DecorationResult> decorateVersionA(LookupResult result) {
-      try {
-        decorateSemaphore.acquire();
-        return immediateFuture(new DecorationResult("dekorerad och klar"));
-      } catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
+      return decorationFuture;
     }
 
     @Override
@@ -180,25 +169,27 @@ public abstract class ThingTester {
     }
 
     public void blockLog() throws InterruptedException {
-      logSemaphore.acquire();
-    }
-
-    public void releaseLog() {
-      logSemaphore.release();
+      logFuture = SettableFuture.create();
     }
 
     public void blockLookup() throws InterruptedException {
-      lookupSemaphore.acquire();
-    }
-
-    public void releaseAll() {
-      logSemaphore.release();
-      lookupSemaphore.release();
-      decorateSemaphore.release();
+      lookupFuture = SettableFuture.create();
     }
 
     public void blockDecoration() throws InterruptedException {
-      decorateSemaphore.acquire();
+      decorationFuture = SettableFuture.create();
+    }
+
+    public void releaseAll() {
+      if (logFuture instanceof SettableFuture) {
+        ((SettableFuture<Void>) logFuture).set(null);
+      }
+      if (lookupFuture instanceof SettableFuture) {
+        ((SettableFuture<LookupResult>) lookupFuture).set(new LookupResult(Version.A, 99));
+      }
+      if (decorationFuture instanceof SettableFuture) {
+        ((SettableFuture<DecorationResult>) decorationFuture).set(new DecorationResult("dekorerad och klar"));
+      }
     }
   }
 

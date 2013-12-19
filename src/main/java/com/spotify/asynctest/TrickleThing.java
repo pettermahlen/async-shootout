@@ -20,10 +20,8 @@ public class TrickleThing implements AsyncThing {
   public static final Name<Integer> NUMBER = named("number", Integer.class);
 
   private final Graph<String> graph;
-  private final Executor executor;
 
-  public TrickleThing(final Services services, Executor executor) {
-    this.executor = executor;
+  public TrickleThing(final Services services) {
     Node2<Integer, String, LookupResult> lookup = new Node2<Integer, String, LookupResult>() {
       @Override
       public ListenableFuture<LookupResult> run(Integer number, String userName) {
@@ -59,6 +57,6 @@ public class TrickleThing implements AsyncThing {
 
   @Override
   public ListenableFuture<String> call(int number, String userName) {
-    return graph.bind(NUMBER, number).bind(USER_NAME, userName).run(executor);
+    return graph.bind(NUMBER, number).bind(USER_NAME, userName).run();
   }
 }
