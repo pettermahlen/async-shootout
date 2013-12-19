@@ -8,7 +8,8 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * TODO: document!
+ * Synchronous implementation of the graph, shown as an example. This class doesn't pass all the
+ * tests.
  */
 public class SynchronousThing implements AsyncThing {
   private static final Logger LOG = LoggerFactory.getLogger(SynchronousThing.class);
