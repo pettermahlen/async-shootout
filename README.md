@@ -4,7 +4,7 @@ async-test
 The purpose of this project is to collect feedback about three different ways to do nested
 asynchronous calls in Java:
 
-1. Raw ListenableFutures
+1. Raw ```ListenableFuture```s
 2. RxJava
 3. An experimental internal library called Trickle.
 
