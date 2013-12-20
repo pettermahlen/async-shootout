@@ -10,6 +10,8 @@ asynchronous calls in Java:
 
 If you want to provide some feedback, then follow the following steps:
 
+1. Fork this repo (not necessary, but it makes it possible to compare implementations and 
+see if we can find new patterns/ideas for best practices)
 1. Implement an example call graph in each of the three classes: 
 [ListenableFutures](src/main/java/com/spotify/asynctest/ListenableFutureThing.java), 
 [RxJava](src/main/java/com/spotify/asynctest/RxJavaThing.java) and
