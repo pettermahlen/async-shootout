@@ -1,4 +1,4 @@
-async-test
+async-shootout
 ==========
 
 The purpose of this project is to compare three different ways to do nested asynchronous calls in
