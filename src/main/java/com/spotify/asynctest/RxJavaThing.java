@@ -6,7 +6,7 @@ import rx.Observable;
 
 /**
  * Implementation of {@link AsyncThing} using RxJava. See
- * https://github.com/Netflix/RxJava/wiki/Getting-Started for information on how to use
+ * https://github.com/ReactiveX/RxJava/wiki/Getting-Started for information on how to use
  * RxJava.
  */
 public class RxJavaThing implements AsyncThing {
