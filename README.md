@@ -15,7 +15,7 @@ If you want try it out, then follow the following steps:
 [ListenableFutures](src/main/java/com/spotify/asynctest/ListenableFutureThing.java), 
 [RxJava](src/main/java/com/spotify/asynctest/RxJavaThing.java) and
 [Trickle](src/main/java/com/spotify/asynctest/TrickleThing.java).
-2. Head to http://goo.gl/forms/rBnDDxNHwO and let us know what you thought of the different
+2. Head to http://goo.gl/forms/rBnDDxNHwO and let people know what you thought of the different
 frameworks.
 
 The example graph is this:
