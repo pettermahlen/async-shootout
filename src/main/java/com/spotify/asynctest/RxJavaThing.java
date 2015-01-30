@@ -3,7 +3,6 @@ package com.spotify.asynctest;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import rx.Observable;
-import rx.util.functions.Action1;
 
 /**
  * Implementation of {@link AsyncThing} using RxJava. See
@@ -28,19 +27,7 @@ public class RxJavaThing implements AsyncThing {
   private <T> ListenableFuture<T> toFuture(Observable<T> observable) {
     final SettableFuture<T> result = SettableFuture.create();
 
-    observable.subscribe(
-        new Action1<T>() {
-          @Override
-          public void call(T t) {
-            result.set(t);
-          }
-        },
-        new Action1<Throwable>() {
-          @Override
-          public void call(Throwable e) {
-            result.setException(e);
-          }
-        });
+    observable.subscribe(result::set, result::setException);
 
     return result;
   }}

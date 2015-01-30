@@ -1,7 +1,5 @@
 package com.spotify.asynctest;
 
-import com.google.common.base.Function;
-import com.google.common.util.concurrent.Futures;
 import rx.Observable;
 import rx.Scheduler;
 
@@ -24,14 +22,8 @@ public class RxServices {
     return Observable.from(services.lookup(number, userName), scheduler);
   }
 
-  Observable<Boolean> log(String userName, LookupResult result){
-    // Observables don't handle void values, hence the conversion to boolean.
-    return Observable.from(Futures.transform(services.log(userName, result), new Function<Void, Boolean>() {
-      @Override
-      public Boolean apply(Void input) {
-        return true;
-      }
-    }));
+  Observable<Void> log(String userName, LookupResult result){
+    return Observable.from(services.log(userName, result));
   }
 
   Observable<DecorationResult> decorateVersionA(LookupResult result) {
